@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.barzahlung.BarzahlungWerkzeug;
 
 /**
  * Mit diesem Werkzeug können Plätze verkauft und storniert werden. Es arbeitet
@@ -27,6 +28,8 @@ public class PlatzVerkaufsWerkzeug
     private Vorstellung _vorstellung;
 
     private PlatzVerkaufsWerkzeugUI _ui;
+    // Das Barzahlungsfenster
+    private BarzahlungWerkzeug _bar;
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -34,6 +37,8 @@ public class PlatzVerkaufsWerkzeug
     public PlatzVerkaufsWerkzeug()
     {
         _ui = new PlatzVerkaufsWerkzeugUI();
+        //Erzeuge das Barzahlungsfenster
+        _bar  = new BarzahlungWerkzeug();
         registriereUIAktionen();
         // Am Anfang wird keine Vorstellung angezeigt:
         setVorstellung(null);
@@ -83,6 +88,14 @@ public class PlatzVerkaufsWerkzeug
                                 .getAusgewaehltePlaetze());
                     }
                 });
+        
+    	_bar.getUI().getOKButton().addActionListener(new ActionListener() {
+			//TODO: OK Button action
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				verkaufe();
+			}
+		});
     }
 
     /**
@@ -90,7 +103,15 @@ public class PlatzVerkaufsWerkzeug
      */
     private void fuehreBarzahlungDurch()
     {
-        verkaufePlaetze(_vorstellung);
+        Set<Platz> plaetze = _ui.getPlatzplan().getAusgewaehltePlaetze();
+    	int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
+    	_bar.setzePreis(preis);
+    }
+    
+    private void verkaufe()
+    {
+    	
+    	verkaufePlaetze(_vorstellung);
     }
 
     /**
