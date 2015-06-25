@@ -92,6 +92,7 @@ public class BarzahlungWerkzeug {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				_ui.getOKButton().setEnabled(false);
+				_ui.getRest().setText("0");
 			}
 			
 			@Override
