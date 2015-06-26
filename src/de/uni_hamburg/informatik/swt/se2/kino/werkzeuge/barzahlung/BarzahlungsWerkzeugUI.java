@@ -13,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/*
+ * Klasse, die die Ui des Bezahldialogs bereitstellt
+ */
 public class BarzahlungsWerkzeugUI extends JDialog {
 
 	/**
@@ -30,7 +33,9 @@ public class BarzahlungsWerkzeugUI extends JDialog {
 	private JLabel _preis;
 	private JTextField _gegeben;
 	private JLabel _rest;
-
+/*
+ * Erstellt die Ui des Barzahlwerkzeugs
+ */
 	public BarzahlungsWerkzeugUI() {
 		BarzahlungDialog=new JDialog(this,"Barzahlung",true);
         
@@ -75,31 +80,49 @@ public class BarzahlungsWerkzeugUI extends JDialog {
         
 	}
 	
+	/*
+	 * Gibt das Label Preis zurück
+	 */
 	public JLabel getPreis()
 	{
 		return _preis;
 	}
 	
+	/*
+     * Gibt das Label Gegeben zurück
+     */
 	public JTextField getGegeben()
 	{
 		return _gegeben;
 	}
 	
+	/*
+     * Gibt das Label Rest zurück
+     */
 	public JLabel getRest()
 	{
 		return _rest;
 	}
 	
+	/*
+     * Gibt den Button Ok zurück
+     */
 	public JButton getOKButton()
 	{
 		return _okButton;
 	}
 	
+	/*
+     * Gibt den Button Cancel zurück
+     */
 	public JButton getAbbrechenButton()
 	{
 		return _abbrechenButton;
 	}
 	
+	/*
+	 * Zeigt die Warnung bzgl Buchstabeneingabe an
+	 */
 	public void zeigeWarnung()
 	{
 		JOptionPane.showMessageDialog(this,
@@ -107,7 +130,10 @@ public class BarzahlungsWerkzeugUI extends JDialog {
 			    "Preiseingabe",
 			    JOptionPane.WARNING_MESSAGE);
 	}
-	
+	/*
+	 * Methode um den Barzahldialog sichtabr oder unsichtbar zu machen
+	 * @param visible Ist es sichabr oder nicht? Boolean visible regelt das!
+	 */
 	public void isDialogvisible(boolean visible)
 	{
 		// Like JFrame, JDialog isn't visible, you'll
