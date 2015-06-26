@@ -6,25 +6,43 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 
+/**
+ * Mit diesem Werkzeug wird die Barzahlung erledigt
+ * 
+ * @author kompetenzzentrum
+ */
 public class BarzahlungWerkzeug {
 	
 	private int _preis;
 	private BarzahlungsWerkzeugUI _ui;
 	
+	/**
+	 * Erzeugt ein neues Barzahlungswerkezug inkl. UI und registriert die Eventlistener.
+	 */
 	public BarzahlungWerkzeug()
 	{
 		_ui = new BarzahlungsWerkzeugUI();
 		registriereUIAktionen();
 	}
 	
+	/**
+	 * Setzt den Preis im Dialogfenster un macht es sichtbar.
+	 * @param preis Der zu setzende Preis.
+	 * @require Preis grösser gleich Null.
+	 */
 	public void setzePreis(int preis)
 	{
+	    assert preis >= 0 : "Vorbedingung verletzt: preis >= null";
 		_preis = preis;
 		_ui.getPreis().setText(""+preis);
     	_ui.getOKButton().setEnabled(false);
     	_ui.isDialogvisible(true);
 	}
 	
+	/**
+	 * Filtert die Eingaben, so dass nur Zahlen eingegebn werden,
+	 * ansonsten wird eine Warnung ausgegeben.
+	 */
 	private void filtereEingabe()
 	{
 		String gegeben_string = _ui.getGegeben().getText();
@@ -45,6 +63,11 @@ public class BarzahlungWerkzeug {
 		
 	}
 	
+	/**
+	 * Erzeugt aus einem String array einen String
+	 * @param array Das zu konvertierende Array
+	 * @return Das Array als String
+	 */
 	private String arraytostring(String[] array)
 	{
 		StringBuilder builder = new StringBuilder();
@@ -54,6 +77,11 @@ public class BarzahlungWerkzeug {
 		return builder.toString();
 	}
 	
+	/**
+	 * Setzt den Restbetrag basierend auf dem übergebenen Preis,
+	 * aktiviert entsprechend den OK Button
+	 * @param gegeben Der eingegebene Preis
+	 */
 	//TODO: Negative Rest
 	private void setzeRest(int gegeben)
 	{
@@ -64,16 +92,27 @@ public class BarzahlungWerkzeug {
 		}
 	}
 	
+	/**
+	 * Setzt die Sichtbarkeit des Dialogs
+	 * @param visible
+	 */
 	public void isDialogvisible(boolean visible)
 	{
 		_ui.isDialogvisible(visible);
 	}
 	
+	/**
+	 * Gibt die UI zurück.
+	 * @return die verwendete DIalog UI
+	 */
 	public BarzahlungsWerkzeugUI getUI()
 	{
 		return _ui;
 	}
 	
+	/**
+	 * Setzt den Dialog und seine Werte auf den Startzustand zurück.
+	 */
 	private void reset()
 	{
 		_ui.isDialogvisible(false);

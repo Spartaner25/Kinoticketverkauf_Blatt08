@@ -108,9 +108,11 @@ public class PlatzVerkaufsWerkzeug
     	_bar.setzePreis(preis);
     }
     
+    /**
+     * Führt die Bezahlung letztendlich durch.
+     */
     private void verkaufe()
     {
-    	
     	verkaufePlaetze(_vorstellung);
     }
 
